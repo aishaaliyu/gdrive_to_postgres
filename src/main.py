@@ -23,7 +23,7 @@ def run():
 
             raw = pd.read_csv(path)
             clean = transform(raw, source_file=path.name)
-            table = path.stem.lower().replace(' ', '_')
+            table = path.stem.lower().replace(' ', '_') # gets table name
             rows = load(clean, table)
             log.info('%s: %d raw rows -> %d loaded into staging.%s',
                      path.name, len(raw), rows, table)

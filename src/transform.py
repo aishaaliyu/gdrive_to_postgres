@@ -48,12 +48,14 @@ CLEANERS = {
     'transactions': _clean_transactions,
 }
 
-
+#returns the cleaned/transformed table
 def transform(df: pd.DataFrame, source_file: str) -> pd.DataFrame:
     df = _base_clean(df)
+    #gets table name from file name
     table = source_file.rsplit('.', 1)[0].lower()
     if table in CLEANERS:
         df = CLEANERS[table](df)
+    #for auditing adds colums to show source file and time 
     df['source_file'] = source_file
     df['loaded_at'] = pd.Timestamp.now(tz='UTC')
     return df

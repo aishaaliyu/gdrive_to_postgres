@@ -8,13 +8,14 @@ SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 GSHEET_MIME = 'application/vnd.google-apps.spreadsheet'
 
 
+# connects to the google cloud service account and get 
 def get_service():
     creds = service_account.Credentials.from_service_account_file(
         str(SERVICE_ACCOUNT_FILE), scopes=SCOPES
     )
     return build('drive', 'v3', credentials=creds)
 
-
+# list all the files in the folder provided
 def list_files(service, folder_id):
     query = "'%s' in parents and trashed = false" % folder_id
     files, page_token = [], None
@@ -29,7 +30,7 @@ def list_files(service, folder_id):
         if not page_token:
             return files
 
-
+#download files to desired path
 def download_file(service, file):
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     name = file['name']

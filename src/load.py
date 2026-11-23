@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, text, inspect
 from config import DB_URL
 
-
+# loads tables into sql schema
 def load(df, table: str, schema: str = 'staging'):
     engine = create_engine(DB_URL)
     source_file = df['source_file'].iloc[0]

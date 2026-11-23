@@ -3,6 +3,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from sqlalchemy.engine import URL
 
+#load env variables
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
 
@@ -10,6 +11,7 @@ DRIVE_FOLDER_ID = os.getenv('DRIVE_FOLDER_ID')
 SERVICE_ACCOUNT_FILE = BASE_DIR / os.getenv('SERVICE_ACCOUNT_FILE')
 RAW_DIR = BASE_DIR / 'data' / 'raw'
 
+# create db url using env variables
 DB_URL = URL.create(
     'postgresql+psycopg2',
     username=os.getenv('DB_USER'),
